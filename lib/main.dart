@@ -27,32 +27,59 @@ class _DicePageState extends State<DicePage> {
 
   @override
   Widget build(BuildContext context) {
-    spin() {}
+    spinBoth() {
+      leftDiceNum = (Random().nextInt(6) + 1);
+      rightDiceNum = Random().nextInt(6) + 1;
+    }
+
     return Center(
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Expanded(
-            child: FlatButton(
-              onPressed: () {
-                setState(() {
-                  leftDiceNum = (Random().nextInt(6) + 1);
-                });
-              },
-              child: Image(
-                image: AssetImage("images/dice$leftDiceNum.png"),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      leftDiceNum = (Random().nextInt(6) + 1);
+                    });
+                  },
+                  child: Image(
+                    image: AssetImage("images/dice$leftDiceNum.png"),
+                  ),
+                ),
               ),
-            ),
+              Expanded(
+                child: FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      rightDiceNum = Random().nextInt(6) + 1;
+                    });
+                  },
+                  child: Image(
+                    image: AssetImage("images/dice$rightDiceNum.png"),
+                  ),
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: FlatButton(
-              onPressed: () {
-                setState(() {
-                  rightDiceNum = Random().nextInt(6) + 1;
-                });
-              },
-              child: Image(
-                image: AssetImage("images/dice$rightDiceNum.png"),
-              ),
+          Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      spinBoth();
+                    });
+                  },
+                  color: Colors.white,
+                  splashColor: Colors.redAccent,
+                  child: Text("Spin Both"),
+                )
+              ],
             ),
           ),
         ],
